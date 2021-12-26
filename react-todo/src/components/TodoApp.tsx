@@ -38,18 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(3),
     },
-    button: {
-      position: "fixed",
-      bottom: 0,
-      right: 0,
-    },
-    todoContainer: {
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "space-around",
-      overflow: "hidden",
-      backgroundColor: theme.palette.background.paper,
-    },
   })
 );
 
@@ -60,20 +48,15 @@ export default function ClippedDrawer() {
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
+          <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
               <Typography variant="h6" noWrap>
                 Todo App
               </Typography>
             </Grid>
-          </Grid>
-          <Grid item>
-            <AddTodoButton />
+            <Grid item>
+              <AddTodoButton />
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
@@ -100,9 +83,19 @@ export default function ClippedDrawer() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+        >
+          <Grid item xs={5}>
+            <TodoCard />
+          </Grid>
+          <Grid item xs={5}>
+            <TodoCard />
+          </Grid>
+        </Grid>
       </main>
     </div>
   );
