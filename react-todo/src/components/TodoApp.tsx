@@ -50,26 +50,12 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "hidden",
       backgroundColor: theme.palette.background.paper,
     },
-    expand: {
-      transform: "rotate(0deg)",
-      marginLeft: "auto",
-      transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: "rotate(180deg)",
-    },
   })
 );
 
 export default function ClippedDrawer() {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
