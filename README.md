@@ -1,2 +1,2 @@
-# React-Voice-Todo-App
-A react todo application where users can add commands with voice commands
+# React-Todo-App
+A todo app built to learn react and typescript. The app is built using material ui and react hook forms
