@@ -13,6 +13,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import TodoCard from "./TodoCard";
 import AddTodoButton from "./AddTodoButton";
 import { Grid } from "@material-ui/core";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
@@ -40,6 +41,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+const TodoCardItem = () => {
+  return (
+    <Grid item xs={5}>
+      <TodoCard
+        title="Test title"
+        time="Today 8am"
+        todoText="I have to do some things"
+      />
+    </Grid>
+  );
+};
 
 export default function ClippedDrawer() {
   const classes = useStyles();
@@ -90,10 +103,18 @@ export default function ClippedDrawer() {
           alignItems="flex-start"
         >
           <Grid item xs={5}>
-            <TodoCard />
+            <TodoCard
+              title="test title"
+              time="today 8am"
+              todoText="I have to do some things"
+            />{" "}
           </Grid>
           <Grid item xs={5}>
-            <TodoCard />
+            <TodoCard
+              title="test title"
+              time="today 8am"
+              todoText="I have to do some things"
+            />{" "}
           </Grid>
         </Grid>
       </main>
