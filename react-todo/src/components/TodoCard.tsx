@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -17,7 +17,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+interface Props {
+  title: string;
+  time: string;
+  todoText: string;
+}
+
+export default function SimpleCard({
+  title,
+  time,
+  todoText,
+}: Props): ReactElement {
   const classes = useStyles();
 
   return (
@@ -31,13 +41,13 @@ export default function SimpleCard() {
         <Grid item>
           <CardContent>
             <Typography variant="h5" component="h2">
-              Title
+              {title}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              Time added
+              {time}
             </Typography>
             <Typography variant="body2" component="p">
-              Text that is inside the todo.
+              {todoText}
             </Typography>
           </CardContent>
         </Grid>
