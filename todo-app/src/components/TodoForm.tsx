@@ -41,8 +41,18 @@ export default function TodoForm({}: Props): ReactElement {
           <TextField
             autoFocus
             margin="dense"
+            required
+            id="Title-required"
+            label="Title Required"
+            defaultValue="Unitled"
+            variant="standard"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
             id="standard-textarea"
-            label="Multiline Placeholder"
+            label="Todo Card Body"
             placeholder="Placeholder"
             multiline
             variant="standard"
