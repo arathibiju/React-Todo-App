@@ -1,5 +1,4 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -9,9 +8,16 @@ import { Divider, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
-import RemoveDoneIcon from "@mui/icons-material/RemoveDone";
 
-export default function BasicCard() {
+interface Props {
+  todosTitle: string;
+  handleDelete(title: string): void;
+}
+
+export const TodoCard = ({ todosTitle, handleDelete }: Props) => {
+  const onClick = (_event: any) => {
+    handleDelete(todosTitle);
+  };
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -19,7 +25,7 @@ export default function BasicCard() {
           Time Added
         </Typography>
         <Typography variant="h5" component="div">
-          Title of Todo
+          {todosTitle}
         </Typography>
         <Typography variant="body2">
           well meaning and kindlyscing bibendum est ultricies integer quis.
@@ -48,6 +54,7 @@ export default function BasicCard() {
             variant="outlined"
             color="error"
             startIcon={<DeleteIcon />}
+            onClick={onClick}
           >
             Delete
           </Button>
@@ -55,4 +62,4 @@ export default function BasicCard() {
       </CardActions>
     </Card>
   );
-}
+};

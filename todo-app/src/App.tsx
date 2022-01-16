@@ -11,12 +11,17 @@ import ListItemText from "@mui/material/ListItemText";
 import { Grid } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import TodoCard from "./components/TodoCard";
-import TodoForm from "./components/TodoForm";
+import { TodoForm } from "./components/TodoForm";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
 function App() {
+  const [todosTitle, setTodosTitle] = useState<string[]>([]);
+
+  const handleAddTodo = (todo: string) => {
+    setTodosTitle([...todosTitle, todo]);
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -73,7 +78,7 @@ function App() {
           laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
           adipiscing.
         </Typography>
-        <TodoCard />
+        <TodoList />
       </Box>
     </Box>
   );

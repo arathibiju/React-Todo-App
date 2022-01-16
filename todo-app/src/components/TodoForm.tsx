@@ -6,12 +6,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 
-interface Props {}
+interface Props {
+  addTodo(title: string): void;
+}
 
-export default function TodoForm({}: Props): ReactElement {
+export const TodoForm = ({ addTodo }: Props) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,6 +24,18 @@ export default function TodoForm({}: Props): ReactElement {
     setOpen(false);
   };
 
+  const [title, setTitle] = useState<string>("");
+
+  const handleOnChange = (event: any) => {
+    setTitle(event.target.value);
+  };
+
+  const handleOnSubmitClick = (event: any) => {
+    event.preventDefault();
+    if (title?.trim()) {
+      addTodo(title);
+    }
+  };
   return (
     <div>
       <Button
@@ -44,7 +58,8 @@ export default function TodoForm({}: Props): ReactElement {
             required
             id="Title-required"
             label="Title Required"
-            defaultValue="Unitled"
+            value={title}
+            onChange={handleOnChange}
             variant="standard"
             fullWidth
           />
@@ -61,11 +76,11 @@ export default function TodoForm({}: Props): ReactElement {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Create</Button>
-          <Button onClick={handleClose} color="error">
+          <Button onClick={handleOnSubmitClick} color="error">
             Cancel
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
