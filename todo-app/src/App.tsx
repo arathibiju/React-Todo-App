@@ -12,7 +12,7 @@ import { Grid } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { TodoForm } from "./components/TodoForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TodoList } from "./components/TodoList";
 
 const drawerWidth = 240;
@@ -22,7 +22,6 @@ function App() {
 
   const handleAddTodo = (todo: string) => {
     setTodosTitle([...todosTitle, todo]);
-    console.log(todo);
   };
 
   const handleDelete = (todo: string) => {
@@ -76,15 +75,6 @@ function App() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing.
-        </Typography>
         <TodoList todosTitle={todosTitle} handleDelete={handleDelete} />
       </Box>
     </Box>

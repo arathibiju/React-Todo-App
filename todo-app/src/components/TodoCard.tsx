@@ -21,9 +21,6 @@ export const TodoCard = ({ todosTitle, handleDelete }: Props) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Time Added
-        </Typography>
         <Typography variant="h5" component="div">
           {todosTitle}
         </Typography>

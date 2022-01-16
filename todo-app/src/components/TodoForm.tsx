@@ -37,6 +37,7 @@ export const TodoForm = ({ addTodo }: Props) => {
     if (title?.trim()) {
       addTodo(title);
     }
+    handleClose();
   };
   return (
     <div>
@@ -45,7 +46,7 @@ export const TodoForm = ({ addTodo }: Props) => {
         onClick={handleClickOpen}
         endIcon={<AddTaskIcon />}
       >
-        Add New Todo
+        Add New Task
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Create a new todo item</DialogTitle>
