@@ -13,6 +13,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { TodoForm } from "./components/TodoForm";
 import { useState } from "react";
+import { TodoList } from "./components/TodoList";
 
 const drawerWidth = 240;
 
@@ -21,7 +22,13 @@ function App() {
 
   const handleAddTodo = (todo: string) => {
     setTodosTitle([...todosTitle, todo]);
+    console.log(todo);
   };
+
+  const handleDelete = (todo: string) => {
+    setTodosTitle(todosTitle.filter((t) => t !== todo));
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -37,7 +44,7 @@ function App() {
               </Typography>
             </Grid>
             <Grid item>
-              <TodoForm />
+              <TodoForm addTodo={handleAddTodo} />
             </Grid>
           </Grid>
         </Toolbar>
@@ -78,7 +85,7 @@ function App() {
           laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
           adipiscing.
         </Typography>
-        <TodoList />
+        <TodoList todosTitle={todosTitle} handleDelete={handleDelete} />
       </Box>
     </Box>
   );

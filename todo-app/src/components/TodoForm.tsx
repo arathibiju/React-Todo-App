@@ -22,12 +22,14 @@ export const TodoForm = ({ addTodo }: Props) => {
 
   const handleClose = () => {
     setOpen(false);
+    setTitle("");
   };
 
   const [title, setTitle] = useState<string>("");
 
   const handleOnChange = (event: any) => {
     setTitle(event.target.value);
+    console.log(title);
   };
 
   const handleOnSubmitClick = (event: any) => {
@@ -75,8 +77,8 @@ export const TodoForm = ({ addTodo }: Props) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Create</Button>
-          <Button onClick={handleOnSubmitClick} color="error">
+          <Button onClick={handleOnSubmitClick}>Create</Button>
+          <Button onClick={handleClose} color="error">
             Cancel
           </Button>
         </DialogActions>
