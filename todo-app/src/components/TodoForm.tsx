@@ -8,7 +8,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import AddTaskIcon from "@mui/icons-material/AddTask";
-import { Snackbar, Alert } from "@mui/material";
 
 interface Props {
   addTodo(title: string): void;
@@ -16,8 +15,10 @@ interface Props {
 }
 
 export const TodoForm = ({ addTodo, todosTitles }: Props) => {
-  const [open, setOpen] = React.useState(false);
-  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [titleError, setTitleError] = React.useState<boolean>(false);
+  const [titleErrorText, setTitleErrorText] = React.useState<string>("");
+  const [title, setTitle] = useState<string>("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,34 +29,25 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
     setTitle("");
   };
 
-  const handleCloseSnackbar = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackbar(false);
-  };
-
-  const [title, setTitle] = useState<string>("");
-
-  const handleOnChange = (event: any) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
+    if (!todosTitles.includes(title)) {
+      setTitleError(false);
+      setTitleErrorText("");
+    }
   };
 
   const handleOnSubmitClick = (event: any) => {
     event.preventDefault();
-    if (!todosTitles.includes(title)) {
-      if (title?.trim()) {
-        addTodo(title);
-        handleClose();
-      }
-    } else {
-      setOpenSnackbar(true);
+    if (todosTitles.includes(title)) {
+      setTitleError(true);
+      setTitleErrorText("Title already exists");
+    } else if (title?.trim()) {
+      addTodo(title);
+      handleClose();
     }
   };
+
   return (
     <div>
       <Button
@@ -73,6 +65,7 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
             appear!
           </DialogContentText>
           <TextField
+            error={titleError}
             autoFocus
             margin="dense"
             required
@@ -82,6 +75,7 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
             onChange={handleOnChange}
             variant="standard"
             fullWidth
+            helperText={titleErrorText}
           />
           <TextField
             margin="dense"
@@ -100,19 +94,6 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity="warning"
-          sx={{ width: "100%" }}
-        >
-          You cannot have duplicate titles!
-        </Alert>
-      </Snackbar>
     </div>
   );
 };

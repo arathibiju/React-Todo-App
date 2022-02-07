@@ -21,9 +21,7 @@ function App() {
   const [todosTitle, setTodosTitle] = useState<string[]>([]);
 
   const handleAddTodo = (todo: string) => {
-    if (!todosTitle.includes(todo)) {
-      setTodosTitle([...todosTitle, todo]);
-    }
+    setTodosTitle([...todosTitle, todo]);
   };
 
   const handleDelete = (todo: string) => {
