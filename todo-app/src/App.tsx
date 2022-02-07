@@ -45,7 +45,7 @@ function App() {
               </Typography>
             </Grid>
             <Grid item>
-              <TodoForm addTodo={handleAddTodo} />
+              <TodoForm addTodo={handleAddTodo} todosTitles={todosTitle} />
             </Grid>
           </Grid>
         </Toolbar>
