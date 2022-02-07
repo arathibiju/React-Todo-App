@@ -12,7 +12,7 @@ import { Grid } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { TodoForm } from "./components/TodoForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TodoList } from "./components/TodoList";
 
 const drawerWidth = 240;
@@ -21,7 +21,9 @@ function App() {
   const [todosTitle, setTodosTitle] = useState<string[]>([]);
 
   const handleAddTodo = (todo: string) => {
-    setTodosTitle([...todosTitle, todo]);
+    if (!todosTitle.includes(todo)) {
+      setTodosTitle([...todosTitle, todo]);
+    }
   };
 
   const handleDelete = (todo: string) => {
