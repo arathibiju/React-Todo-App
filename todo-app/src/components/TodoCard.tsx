@@ -11,12 +11,13 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 
 interface Props {
   todosTitle: string;
-  handleDelete(title: string): void;
+  todosBody: string;
+  handleDelete(title: string, body: string): void;
 }
 
-export const TodoCard = ({ todosTitle, handleDelete }: Props) => {
+export const TodoCard = ({ todosTitle, todosBody, handleDelete }: Props) => {
   const onClick = (_event: any) => {
-    handleDelete(todosTitle);
+    handleDelete(todosTitle, todosBody);
   };
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -24,11 +25,7 @@ export const TodoCard = ({ todosTitle, handleDelete }: Props) => {
         <Typography variant="h5" component="div">
           {todosTitle}
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindlyscing bibendum est ultricies integer quis.
-          Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque
-          felis imperdiet proin fermentum leo. Mauris com.
-        </Typography>
+        <Typography variant="body2">{todosBody}</Typography>
       </CardContent>
       <CardActions>
         <Stack

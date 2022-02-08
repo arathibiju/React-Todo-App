@@ -10,7 +10,7 @@ import { useState } from "react";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 
 interface Props {
-  addTodo(title: string): void;
+  addTodo(title: string, body: string): void;
   todosTitles: string[];
 }
 
@@ -19,6 +19,7 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
   const [titleError, setTitleError] = React.useState<boolean>(false);
   const [titleErrorText, setTitleErrorText] = React.useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const [body, setBody] = useState<string>("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,14 +28,19 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
   const handleClose = () => {
     setOpen(false);
     setTitle("");
+    setBody("");
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
     if (!todosTitles.includes(title)) {
       setTitleError(false);
       setTitleErrorText("");
     }
+  };
+
+  const handleOnBodyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBody(event.target.value);
   };
 
   const handleOnSubmitClick = (event: any) => {
@@ -43,7 +49,7 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
       setTitleError(true);
       setTitleErrorText("Title already exists");
     } else if (title?.trim()) {
-      addTodo(title);
+      addTodo(title, body);
       handleClose();
     }
   };
@@ -69,22 +75,22 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
             autoFocus
             margin="dense"
             required
-            id="Title-required"
             label="Title Required"
             value={title}
-            onChange={handleOnChange}
+            onChange={handleOnTitleChange}
             variant="standard"
             fullWidth
             helperText={titleErrorText}
           />
           <TextField
             margin="dense"
-            id="standard-textarea"
             label="Todo Card Body"
             placeholder="Placeholder"
             multiline
             variant="standard"
             fullWidth
+            onChange={handleOnBodyChange}
+            value={body}
           />
         </DialogContent>
         <DialogActions>

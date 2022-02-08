@@ -19,13 +19,16 @@ const drawerWidth = 240;
 
 function App() {
   const [todosTitle, setTodosTitle] = useState<string[]>([]);
+  const [todosBody, setTodosBody] = useState<string[]>([]);
 
-  const handleAddTodo = (todo: string) => {
+  const handleAddTodo = (todo: string, body: string) => {
     setTodosTitle([...todosTitle, todo]);
+    setTodosBody([...todosBody, body]);
   };
 
-  const handleDelete = (todo: string) => {
+  const handleDelete = (todo: string, body: string) => {
     setTodosTitle(todosTitle.filter((t) => t !== todo));
+    setTodosBody(todosBody.filter((t) => t !== body));
   };
 
   return (
@@ -75,7 +78,11 @@ function App() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <TodoList todosTitle={todosTitle} handleDelete={handleDelete} />
+        <TodoList
+          todosTitle={todosTitle}
+          handleDelete={handleDelete}
+          todosBody={todosBody}
+        />
       </Box>
     </Box>
   );
