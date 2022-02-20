@@ -4,6 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import TodoEditDialog from "./TodoEdit";
 
 interface Props {
   todosTitle: string;
@@ -26,12 +27,10 @@ export const TodoCard = ({ todosTitle, todosBody, handleDelete }: Props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" variant="outlined">
-          Edit
-        </Button>
         <Button size="small" variant="outlined" color="error" onClick={onClick}>
           Delete
         </Button>
+        <TodoEditDialog />
       </CardActions>
     </Card>
   );

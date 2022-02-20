@@ -8,7 +8,17 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import AddTaskIcon from "@mui/icons-material/AddTask";
+import { Slide } from "@mui/material";
+import { TransitionProps } from "@mui/material/transitions";
 
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 interface Props {
   addTodo(title: string, body: string): void;
   todosTitles: string[];
@@ -63,7 +73,11 @@ export const TodoForm = ({ addTodo, todosTitles }: Props) => {
       >
         Add New Task
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
         <DialogTitle>Create a new todo item</DialogTitle>
         <DialogContent>
           <DialogContentText>
